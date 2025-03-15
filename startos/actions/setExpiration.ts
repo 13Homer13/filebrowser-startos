@@ -49,5 +49,5 @@ export const setExpiration = sdk.Action.withInput(
 
   // the execution function
   async ({ effects, input }) =>
-    jsonFile.merge({ tokenExpirationTime: `${input.timeout}h` }),
+    jsonFile.merge(effects, { tokenExpirationTime: `${input.timeout}h` }),
 )

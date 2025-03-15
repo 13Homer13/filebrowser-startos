@@ -10,7 +10,7 @@ import { resetAdminUser } from './actions/resetAdminUser'
 
 // **** Install ****
 const install = sdk.setupInstall(async ({ effects }) => {
-  await jsonFile.write(configDefaults)
+  await jsonFile.write(effects, configDefaults)
   await sdk.store.setOwn(effects, sdk.StorePath.adminUserCreated, false)
   await sdk.action.requestOwn(effects, resetAdminUser, 'critical', {})
 })

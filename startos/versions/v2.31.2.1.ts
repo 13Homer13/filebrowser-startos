@@ -14,7 +14,10 @@ export const v_2_31_2_1 = VersionInfo.of({
         await readFile('/root/start9/config.yaml', 'utf-8'),
       ) as { userTimeout: string }
 
-      await jsonFile.write(configDefaults)
+      await jsonFile.write(effects, {
+        ...configDefaults,
+        tokenExpirationTime: `${configYaml.userTimeout}h`,
+      })
 
       // remove old start9 dir
       await rmdir('/root/start9')
