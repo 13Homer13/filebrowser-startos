@@ -15,8 +15,6 @@ export const configDefaults = {
   baseURL: '',
   address: '0.0.0.0',
   log: 'stdout',
-  database: `${mnt}/filebrowser.db`,
-  root: `${mnt}/data`,
   tokenExpirationTime: '2h',
 }
 
