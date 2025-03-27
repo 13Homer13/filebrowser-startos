@@ -28,11 +28,6 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
     subcontainer: { imageId: 'filebrowser' },
     command: ['/filebrowser', '-c', `${mnt}/filebrowser.json`],
     mounts: sdk.Mounts.of().addVolume('main', null, mnt, false),
-    env: {
-      FB_DATABASE: `${mnt}/filebrowser.db`,
-      FB_CONFIG: `${mnt}/filebrowser.json`,
-      FB_ROOT: `${mnt}/data`,
-    },
     ready: {
       display: 'Web Interface',
       fn: () =>

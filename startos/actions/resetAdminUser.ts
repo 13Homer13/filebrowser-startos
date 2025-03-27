@@ -42,13 +42,8 @@ export const resetAdminUser = sdk.Action.withoutInput(
         '-p',
         password,
         '--perm.admin',
-        '>/dev/null',
       ],
-      {env: {
-        FB_DATABASE: `${mnt}/filebrowser.db`,
-        FB_CONFIG: `${mnt}/filebrowser.json`,
-        FB_ROOT: `${mnt}/data`,
-      },},
+      {},
       'setadmin',
     )
 
