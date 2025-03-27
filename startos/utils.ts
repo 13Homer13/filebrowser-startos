@@ -1,19 +1,19 @@
 export const uiPort = 8080
 
-export const adminUsername = 'admin'
-
 export const randomPassword = {
   charset: 'a-z,A-Z,1-9,!,@,$,%,&,*',
   len: 22,
 }
+
+export const mnt = '/root'
 
 export const configDefaults = {
   port: uiPort,
   baseURL: '',
   address: '0.0.0.0',
   log: 'stdout',
-  database: '/root/filebrowser.db',
-  root: '/root/data',
+  database: `${mnt}/filebrowser.db`,
+  root: `${mnt}/data`,
   tokenExpirationTime: '2h',
 }
 

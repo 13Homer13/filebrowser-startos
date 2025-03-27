@@ -1,6 +1,6 @@
 import { sdk } from './sdk'
 import { T } from '@start9labs/start-sdk'
-import { uiPort } from './utils'
+import { mnt, uiPort } from './utils'
 
 export const main = sdk.setupMain(async ({ effects, started }) => {
   /**
@@ -27,7 +27,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
   return sdk.Daemons.of(effects, started, healthReceipts).addDaemon('primary', {
     subcontainer: { imageId: 'filebrowser' },
     command: ['filebrowser'],
-    mounts: sdk.Mounts.of().addVolume('main', null, '/root', false),
+    mounts: sdk.Mounts.of().addVolume('main', null, mnt, false),
     ready: {
       display: 'Web Interface',
       fn: () =>
