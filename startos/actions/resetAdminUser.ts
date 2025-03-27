@@ -18,7 +18,9 @@ export const resetAdminUser = sdk.Action.withoutInput(
     return {
       name: adminExists ? `Reset ${nameStr}` : `Create ${nameStr}`,
       description: adminExists ? `Reset ${descStr}` : `Create ${descStr}`,
-      warning: null,
+      warning: adminExists
+        ? 'Are you sure you want to reset your admin user password?'
+        : null,
       allowedStatuses: 'only-stopped',
       group: null,
       visibility: 'enabled',
@@ -28,6 +30,20 @@ export const resetAdminUser = sdk.Action.withoutInput(
   // the execution function
   async ({ effects }) => {
     const password = utils.getDefaultString(randomPassword)
+
+    console.log(
+      await sdk.runCommand(
+        effects,
+        { imageId: 'filebrowser' },
+        ['env'],
+        {
+          mounts: sdk.Mounts.of()
+            .addVolume('main', null, '/root', false)
+            .build(),
+        },
+        'printenv',
+      ),
+    )
 
     await sdk.runCommand(
       effects,
