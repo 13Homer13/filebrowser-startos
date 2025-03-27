@@ -45,6 +45,7 @@ const install = sdk.setupInstall(async ({ effects }) => {
   await mkdir('/media/startos/volumes/main/My files')
 
   await sdk.store.setOwn(effects, sdk.StorePath.adminPassCreated, false)
+
   await sdk.action.requestOwn(effects, resetAdminUser, 'critical', {
     reason: 'Create your admin user password',
   })
