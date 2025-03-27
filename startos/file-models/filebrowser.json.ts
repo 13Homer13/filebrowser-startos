@@ -1,5 +1,5 @@
 import { matches, FileHelper } from '@start9labs/start-sdk'
-import { configDefaults, mnt } from '../utils'
+import { configDefaults } from '../utils'
 
 const { port, baseURL, address, log, tokenExpirationTime, database, root } =
   configDefaults

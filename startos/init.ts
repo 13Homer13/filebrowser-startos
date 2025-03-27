@@ -7,6 +7,7 @@ import { actions } from './actions'
 import { jsonFile } from './file-models/filebrowser.json'
 import { configDefaults, mnt } from './utils'
 import { resetAdminUser } from './actions/resetAdminUser'
+import { mkdir } from 'fs/promises'
 
 // **** Install ****
 const install = sdk.setupInstall(async ({ effects }) => {
@@ -33,12 +34,15 @@ const install = sdk.setupInstall(async ({ effects }) => {
       'add',
       'admin',
       'taxationistheft',
+      '--perm.admin',
     ],
     {
       mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
     },
     'setadmin',
   )
+
+  await mkdir('/media/startos/volumes/main/My files')
 
   await sdk.store.setOwn(effects, sdk.StorePath.adminPassCreated, false)
   await sdk.action.requestOwn(effects, resetAdminUser, 'critical', {

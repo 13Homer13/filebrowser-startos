@@ -13,13 +13,13 @@ export const resetAdminUser = sdk.Action.withoutInput(
       .const()
 
     const nameStr = 'Admin User'
-    const descStr = 'your admin username and password'
+    const descStr = 'Admin User'
 
     return {
       name: adminExists ? `Reset ${nameStr}` : `Create ${nameStr}`,
       description: adminExists ? `Reset ${descStr}` : `Create ${descStr}`,
       warning: adminExists
-        ? 'Are you sure you want to reset your admin user password?'
+        ? 'Are you sure you want to reset your admin user?'
         : null,
       allowedStatuses: 'only-stopped',
       group: null,
