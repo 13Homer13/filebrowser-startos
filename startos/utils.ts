@@ -8,8 +8,6 @@ export const randomPassword = {
   len: 22,
 }
 
-export const mnt = '/root'
-
 export const configDefaults = {
   port: uiPort,
   baseURL: '',

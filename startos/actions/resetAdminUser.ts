@@ -1,6 +1,6 @@
 import { utils } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
-import { mnt, randomPassword } from '../utils'
+import { randomPassword } from '../utils'
 
 export const resetAdminUser = sdk.Action.withoutInput(
   // id
