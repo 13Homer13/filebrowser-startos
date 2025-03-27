@@ -43,7 +43,9 @@ export const resetAdminUser = sdk.Action.withoutInput(
         password,
         '--perm.admin',
       ],
-      {},
+      {
+        mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
+      },
       'setadmin',
     )
 
