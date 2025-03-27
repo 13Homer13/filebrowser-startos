@@ -1,6 +1,6 @@
 import { utils } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
-import { randomPassword } from '../utils'
+import { mnt, randomPassword } from '../utils'
 
 export const resetAdminUser = sdk.Action.withoutInput(
   // id
@@ -31,25 +31,13 @@ export const resetAdminUser = sdk.Action.withoutInput(
   async ({ effects }) => {
     const password = utils.getDefaultString(randomPassword)
 
-    console.log(
-      await sdk.runCommand(
-        effects,
-        { imageId: 'filebrowser' },
-        ['env'],
-        {
-          mounts: sdk.Mounts.of()
-            .addVolume('main', null, '/root', false)
-            .build(),
-        },
-        'printenv',
-      ),
-    )
-
     await sdk.runCommand(
       effects,
       { imageId: 'filebrowser' },
       [
         '/filebrowser',
+        '-c',
+        `${mnt}/filebrowser.json`,
         'users',
         'update',
         '1',
