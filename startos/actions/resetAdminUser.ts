@@ -1,6 +1,6 @@
 import { utils } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
-import { randomPassword } from '../utils'
+import { mnt, randomPassword } from '../utils'
 
 export const resetAdminUser = sdk.Action.withoutInput(
   // id
@@ -33,7 +33,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
       effects,
       { imageId: 'filebrowser' },
       [
-        'filebrowser',
+        '/filebrowser',
         'users',
         'update',
         '1',
@@ -44,7 +44,11 @@ export const resetAdminUser = sdk.Action.withoutInput(
         '--perm.admin',
         '>/dev/null',
       ],
-      {},
+      {env: {
+        FB_DATABASE: `${mnt}/filebrowser.db`,
+        FB_CONFIG: `${mnt}/filebrowser.json`,
+        FB_ROOT: `${mnt}/data`,
+      },},
       'setadmin',
     )
 
