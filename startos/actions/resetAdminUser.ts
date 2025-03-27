@@ -40,7 +40,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
         '-u',
         adminUsername,
         '-p',
-        `"${password}"`,
+        password,
         '--perm.admin',
         '>/dev/null',
       ],
