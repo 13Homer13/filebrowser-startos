@@ -9,7 +9,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
   // metadata
   async ({ effects }) => {
     const adminExists = await sdk.store
-      .getOwn(effects, sdk.StorePath.adminUserCreated)
+      .getOwn(effects, sdk.StorePath.adminPassCreated)
       .const()
 
     const nameStr = 'Admin User'
@@ -53,7 +53,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
       'setadmin',
     )
 
-    await sdk.store.setOwn(effects, sdk.StorePath.adminUserCreated, true)
+    await sdk.store.setOwn(effects, sdk.StorePath.adminPassCreated, true)
 
     return {
       version: '1',

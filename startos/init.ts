@@ -15,14 +15,32 @@ const install = sdk.setupInstall(async ({ effects }) => {
   await sdk.runCommand(
     effects,
     { imageId: 'filebrowser' },
-    ['/filebrowser', 'config', 'init', '-c', `${mnt}/filebrowser.json`],
+    ['/filebrowser', '-c', `${mnt}/filebrowser.json`, 'config', 'init'],
     {
       mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
     },
     'setadmin',
   )
 
-  await sdk.store.setOwn(effects, sdk.StorePath.adminUserCreated, false)
+  await sdk.runCommand(
+    effects,
+    { imageId: 'filebrowser' },
+    [
+      '/filebrowser',
+      '-c',
+      `${mnt}/filebrowser.json`,
+      'users',
+      'add',
+      'admin',
+      'taxationistheft',
+    ],
+    {
+      mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
+    },
+    'setadmin',
+  )
+
+  await sdk.store.setOwn(effects, sdk.StorePath.adminPassCreated, false)
   await sdk.action.requestOwn(effects, resetAdminUser, 'critical', {
     reason: 'Create your admin user password',
   })

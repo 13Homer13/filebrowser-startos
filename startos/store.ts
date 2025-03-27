@@ -1,7 +1,7 @@
 import { setupExposeStore } from '@start9labs/start-sdk'
 
 export type Store = {
-  adminUserCreated: boolean
+  adminPassCreated: boolean
 }
 
 export const exposedStore = setupExposeStore<Store>(() => [])
