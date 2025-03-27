@@ -52,7 +52,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
 
     return {
       version: '1',
-      title: 'Success',
+      title: 'Success!',
       message:
         'Your admin username and password are below. Write them down or save them to a password manager.',
       result: {

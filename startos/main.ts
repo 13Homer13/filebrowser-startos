@@ -26,7 +26,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
    */
   return sdk.Daemons.of(effects, started, healthReceipts).addDaemon('primary', {
     subcontainer: { imageId: 'filebrowser' },
-    command: ['filebrowser'],
+    command: ['/filebrowser', '-c', `${mnt}/filebrowser.json`],
     mounts: sdk.Mounts.of().addVolume('main', null, mnt, false),
     ready: {
       display: 'Web Interface',
