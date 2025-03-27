@@ -19,7 +19,7 @@ export const resetAdminUser = sdk.Action.withoutInput(
       name: adminExists ? `Reset ${nameStr}` : `Create ${nameStr}`,
       description: adminExists ? `Reset ${descStr}` : `Create ${descStr}`,
       warning: null,
-      allowedStatuses: 'any',
+      allowedStatuses: 'only-stopped',
       group: null,
       visibility: 'enabled',
     }
