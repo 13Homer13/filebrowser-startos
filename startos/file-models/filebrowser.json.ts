@@ -7,7 +7,7 @@ const { object, string, literal } = matches
 
 const shape = object({
   port: literal(port).onMismatch(port),
-  baseURL: string.optional(baseURL).onMismatch(baseURL), // @TODO
+  baseURL: string.onMismatch(baseURL),
   address: literal(address).onMismatch(address),
   log: literal(log).onMismatch(log),
   database: literal(database).onMismatch(database),

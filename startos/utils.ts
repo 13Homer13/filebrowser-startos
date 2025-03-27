@@ -1,3 +1,6 @@
+import { Effects } from '@start9labs/start-sdk/base/lib/Effects'
+import { sdk } from './sdk'
+
 export const uiPort = 8080
 
 export const randomPassword = {
@@ -19,4 +22,12 @@ export const configDefaults = {
 
 export function tokenExpirationToNumber(val: string): number {
   return Number(val.replace(/\D/g, ''))
+}
+
+export async function getPrimaryInterfaceUrls(
+  effects: Effects,
+): Promise<string[]> {
+  const httpInterface = await sdk.serviceInterface.getOwn(effects, 'ui').const()
+
+  return httpInterface?.addressInfo?.urls || []
 }
