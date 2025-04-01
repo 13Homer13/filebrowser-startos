@@ -4,8 +4,8 @@ import { load } from 'js-yaml'
 import { jsonFile } from '../file-models/filebrowser.json'
 import { configDefaults } from '../utils'
 
-export const v_2_31_2_1 = VersionInfo.of({
-  version: '2.31.2:1',
+export const v_2_32_0_1 = VersionInfo.of({
+  version: '2.32.0:1',
   releaseNotes: 'Revamped for StartOS 0.3.6',
   migrations: {
     up: async ({ effects }) => {
