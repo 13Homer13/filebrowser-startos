@@ -4,4 +4,8 @@ export type Store = {
   adminPassCreated: boolean
 }
 
+export const initStore: Store = {
+  adminPassCreated: false,
+}
+
 export const exposedStore = setupExposeStore<Store>(() => [])

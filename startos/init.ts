@@ -1,5 +1,5 @@
 import { sdk } from './sdk'
-import { exposedStore } from './store'
+import { exposedStore, initStore } from './store'
 import { setDependencies } from './dependencies'
 import { setInterfaces } from './interfaces'
 import { versions } from './versions'
@@ -9,40 +9,39 @@ import { configDefaults, mnt } from './utils'
 import { resetAdminUser } from './actions/resetAdminUser'
 import { mkdir } from 'fs/promises'
 
-// **** Install ****
-const install = sdk.setupInstall(async ({ effects }) => {
+// **** Pre Install ****
+const preInstall = sdk.setupPreInstall(async ({ effects }) => {
   await jsonFile.write(effects, configDefaults)
-
-  await sdk.runCommand(
-    effects,
-    { imageId: 'filebrowser' },
-    ['/filebrowser', '-c', `${mnt}/filebrowser.json`, 'config', 'init'],
-    {
-      mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
-    },
-    'setadmin',
-  )
-
-  await sdk.runCommand(
-    effects,
-    { imageId: 'filebrowser' },
-    [
-      '/filebrowser',
-      '-c',
-      `${mnt}/filebrowser.json`,
-      'users',
-      'add',
-      'admin',
-      'taxationistheft',
-      '--perm.admin',
-    ],
-    {
-      mounts: sdk.Mounts.of().addVolume('main', null, '/root', false).build(),
-    },
-    'setadmin',
-  )
-
   await mkdir('/media/startos/volumes/main/My files')
+})
+
+// **** Post Install ****
+const postInstall = sdk.setupPostInstall(async ({ effects }) => {
+  await sdk.SubContainer.with(
+    effects,
+    { imageId: 'filebrowser' },
+    sdk.Mounts.of().addVolume('main', null, '/root', false),
+    'set-admin',
+    async (sub) => {
+      await sub.exec([
+        '/filebrowser',
+        '-c',
+        `${mnt}/filebrowser.json`,
+        'config',
+        'init',
+      ])
+      await sub.exec([
+        '/filebrowser',
+        '-c',
+        `${mnt}/filebrowser.json`,
+        'users',
+        'add',
+        'admin',
+        'taxationistheft',
+        '--perm.admin',
+      ])
+    },
+  )
 
   await sdk.store.setOwn(effects, sdk.StorePath.adminPassCreated, false)
 
@@ -59,10 +58,12 @@ const uninstall = sdk.setupUninstall(async ({ effects }) => {})
  */
 export const { packageInit, packageUninit, containerInit } = sdk.setupInit(
   versions,
-  install,
+  preInstall,
+  postInstall,
   uninstall,
   setInterfaces,
   setDependencies,
   actions,
+  initStore,
   exposedStore,
 )

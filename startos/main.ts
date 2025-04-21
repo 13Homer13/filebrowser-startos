@@ -25,9 +25,13 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
    * Each daemon defines its own health check, which can optionally be exposed to the user.
    */
   return sdk.Daemons.of(effects, started, healthReceipts).addDaemon('primary', {
-    subcontainer: { imageId: 'filebrowser' },
+    subcontainer: await sdk.SubContainer.of(
+      effects,
+      { imageId: 'filebrowser' },
+      sdk.Mounts.of().addVolume('main', null, mnt, false),
+      'filebrowser-sub',
+    ),
     command: ['/filebrowser', '-c', `${mnt}/filebrowser.json`],
-    mounts: sdk.Mounts.of().addVolume('main', null, mnt, false),
     ready: {
       display: 'Web Interface',
       fn: () =>
