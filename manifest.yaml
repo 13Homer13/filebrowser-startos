@@ -1,12 +1,12 @@
 id: filebrowser
 title: "File Browser"
-version: 2.31.2
+version: 2.32.0
 release-notes: |
-  - Added Markdown and epub file preview in Ace editor
-  - Added Czech and Catalan language support
-  - Updated base image to alpine 2.0
-  - Update bundling process to use Deno emit module
-  - Full list of upstream changes available [here](https://github.com/filebrowser/filebrowser/compare/v2.30.0...v2.31.2)
+  - Improved reliability of file operations like copy, move, and upload
+  - Fixed disk usage refresh and health checks in container setups
+  - Updated Spanish and Korean translations
+  - Upgraded system components for better performance and compatibility
+  - Full list of upstream changes available [here](https://github.com/filebrowser/filebrowser/compare/v2.31.2...v2.32.0)
 license: Apache-2.0
 wrapper-repo: "https://github.com/Start9Labs/filebrowser-startos"
 upstream-repo: "https://github.com/filebrowser/filebrowser"
