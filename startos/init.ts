@@ -12,7 +12,7 @@ import { mkdir } from 'fs/promises'
 // **** Pre Install ****
 const preInstall = sdk.setupPreInstall(async ({ effects }) => {
   await jsonFile.write(effects, configDefaults)
-  await mkdir('/media/startos/volumes/main/My files')
+  await mkdir('/media/startos/volumes/main/files', { recursive: true })
 })
 
 // **** Post Install ****
@@ -20,7 +20,7 @@ const postInstall = sdk.setupPostInstall(async ({ effects }) => {
   await sdk.SubContainer.with(
     effects,
     { imageId: 'filebrowser' },
-    sdk.Mounts.of().addVolume('main', null, '/root', false),
+    sdk.Mounts.of().addVolume('main', null, mnt, false),
     'set-admin',
     async (sub) => {
       await sub.exec([

@@ -2,7 +2,7 @@ import { VersionInfo, IMPOSSIBLE } from '@start9labs/start-sdk'
 import { readFile, rename, rmdir } from 'fs/promises'
 import { load } from 'js-yaml'
 import { jsonFile } from '../file-models/filebrowser.json'
-import { configDefaults } from '../utils'
+import { configDefaults, mnt } from '../utils'
 
 export const v_2_32_0_1 = VersionInfo.of({
   version: '2.32.0:1',
@@ -20,7 +20,7 @@ export const v_2_32_0_1 = VersionInfo.of({
       })
 
       // rename root
-      await rename('/root/data', '/root/My files')
+      await rename('/root/data', `${mnt}/files`)
 
       // remove old start9 dir
       await rmdir('/root/start9')
