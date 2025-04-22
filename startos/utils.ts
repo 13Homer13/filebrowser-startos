@@ -13,7 +13,7 @@ export const configDefaults = {
   address: '0.0.0.0',
   log: 'stdout',
   database: `${mnt}/filebrowser.db`,
-  root: `${mnt}/My files`,
+  root: `${mnt}/files`,
   tokenExpirationTime: '2h',
 }
 

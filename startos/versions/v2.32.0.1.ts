@@ -20,7 +20,7 @@ export const v_2_32_0_1 = VersionInfo.of({
       })
 
       // rename root
-      await rename('/root/data', '/root/My files')
+      await rename('/root/data', '/root/files')
 
       // remove old start9 dir
       await rmdir('/root/start9')
