@@ -12,7 +12,7 @@ import { mkdir } from 'fs/promises'
 // **** Pre Install ****
 const preInstall = sdk.setupPreInstall(async ({ effects }) => {
   await jsonFile.write(effects, configDefaults)
-  await mkdir('/media/startos/volumes/main/files')
+  await mkdir('/media/startos/volumes/main/files', { recursive: true })
 })
 
 // **** Post Install ****
