@@ -20,7 +20,7 @@ const postInstall = sdk.setupPostInstall(async ({ effects }) => {
   await sdk.SubContainer.with(
     effects,
     { imageId: 'filebrowser' },
-    sdk.Mounts.of().addVolume('main', null, '/root', false),
+    sdk.Mounts.of().addVolume('main', null, mnt, false),
     'set-admin',
     async (sub) => {
       await sub.exec([
